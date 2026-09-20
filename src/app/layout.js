@@ -1,14 +1,27 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Lora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import Image from "next/image";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const space = Space_Grotesk({
+  variable: "--font-space",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -20,9 +33,32 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${lora.variable} ${space.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <header className="px-5 py-2 flex  items-center justify-between gap-5 ">
+          <Link href="/">
+            <Image
+              width={120}
+              height={100}
+              className="rounded-4xl"
+              src="/logo.png"
+              alt=""
+            />
+          </Link>
+
+          <div className="space-x-5 ">
+            <Link className="btn" href="/foods">
+              Food
+            </Link>
+            <Link className="btn" href="/reviews">
+              Reviews
+            </Link>
+          </div>
+        </header>
+
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
