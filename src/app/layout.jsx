@@ -2,6 +2,7 @@ import { Inter, Lora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import CartProvider from "@/context/CartProvider";
 
 const lora = Lora({
   variable: "--font-lora",
@@ -62,7 +63,9 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* Main Content Area */}
-        <main className="flex-1 container-page py-6">{children}</main>
+        <main className="flex-1 container-page py-6">
+          <CartProvider>{children}</CartProvider>
+        </main>
 
         {/* Footer */}
         <footer className="border-t border-[var(--border)] bg-[var(--card)] py-6 mt-auto">

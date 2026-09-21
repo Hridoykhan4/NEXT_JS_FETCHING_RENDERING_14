@@ -4,7 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: '"www.themealdb.com',
+        hostname: 'www.themealdb.com',
+      },
+      {
+        protocol: "https",
+        hostname: 'randomuser.me',
       },
     ],
   },
