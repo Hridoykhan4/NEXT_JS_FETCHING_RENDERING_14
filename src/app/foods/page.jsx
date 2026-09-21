@@ -1,6 +1,7 @@
 import FoodCard from "@/components/cards/FoodCard";
 import React from "react";
 import CartItems from "./CartItems";
+import InputSearch from "@/components/InputSearch";
 
 // Professional API Fetching Function
 const getFoods = async () => {
@@ -22,7 +23,9 @@ const getFoods = async () => {
     }
 };
 
-export default async function FoodsPage() {
+export default async function FoodsPage({searchParams}) {
+    const {search = ""} = await searchParams;
+    console.log(search);
     const foods = await getFoods();
 
     return (
@@ -39,7 +42,7 @@ export default async function FoodsPage() {
 
             {/* Search Bar Container */}
             <div>
-                {/* <InputSearch /> */}
+                <InputSearch />
             </div>
 
             {/* Main Grid Layout (Foods + Cart Sidebar) */}
