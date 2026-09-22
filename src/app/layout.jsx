@@ -26,8 +26,12 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Khatian | Delicious Food & Dining",
-  description: "Experience the finest food & ordering experience",
+  title: {
+    // Dynamic
+    default: "Yantun khaijan | Delicious Food & Dining",
+    template: '%s | Yantun Khaijan'
+  },
+  description: "Experience the finest food & ordering experience in Noakhali",
 };
 
 export default function RootLayout({ children }) {

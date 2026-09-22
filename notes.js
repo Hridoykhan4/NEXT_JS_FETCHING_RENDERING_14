@@ -65,3 +65,27 @@ cache: 'force-cache' হলো Static Site Generation (SSG)।
 ১ লাখ ইউজারও যদি ১০ সেকেন্ডের মধ্যে ওয়েবসাইটে আসে, এপিআই কল হবে মাত্র ১ বার। বাকি ৯৯,৯৯৯ জন ইউজার সার্ভারের ক্যাশ থেকেই ইনস্ট্যান্ট পেজ লোড পেয়ে যাবে।
 
  */
+
+
+
+/* 
+    Tricks
+    metadata cleint e use kora jay na, so amra client code k alada kore, server e metadata likhsi, reviews dekhle bujhbi
+
+
+    // title.absolute ব্যবহার করার কারণ হলো Next.js-এর Root Layout-এ সেট করা টাইটেল টেমপ্লেটকে (Title Template) বাইপাস করা বা অমান্য করা।
+
+
+    export const metadata = {
+    title: {
+    // Dynamic
+    default: "Yantun khaijan | Delicious Food & Dining",
+    template: '%s | Yantun Khaijan'
+    },
+    description: "Experience the finest food & ordering experience in Noakhali",
+};
+
+
+*/
+
+

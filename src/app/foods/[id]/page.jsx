@@ -24,6 +24,22 @@ const getSingleFood = async (id) => {
     }
 };
 
+export const generateMetadata = async ({ params }) => {
+    const { id } = await params;
+    const food = await getSingleFood(id);
+    return {
+        title: food.title,
+        generator: 'Next.js',
+        applicationName: 'Yantun khaijan',
+        referrer: 'origin-when-cross-origin',
+        keywords: ['Next.js', 'React', 'JavaScript'],
+        authors: [{ name: 'Hridoy Khan' }, { name: 'Hridoy', url: 'https://nextjs.org' }],
+        creator: 'Md. Toyob Uddin Hridoy',
+        publisher: 'Sebastian Markbåge',
+    }
+}
+
+
 const FoodDetailsPage = async ({ params }) => {
     const { id } = await params;
     const food = await getSingleFood(id);

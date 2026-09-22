@@ -3,12 +3,22 @@ import React from "react";
 import CartItems from "./CartItems";
 import InputSearch from "@/components/InputSearch";
 
+
+// metadata
+export const metadata = {
+    title: 'Foods',
+    // description: "Experience the finest food & ordering experience in Noakhali",
+    description: 'Experience finest beefs, chicken, dessert items in the land of Noakhali'
+}
+
+
 // Professional API Fetching Function
 const getFoods = async (search = "") => {
     try {
         const res = await fetch(
             `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${encodeURIComponent(search)}`,
             { next: { revalidate: 10 } } // ISR caching strategy
+            // , একবার কোনো ইউজার সাইটে ঢুকে পেজ রেন্ডার করলে Next.js সার্ভার ডাটা ক্যাশ (Cache) করে নেয়।
         );
 
         if (!res.ok) throw new Error("Failed to fetch foods");

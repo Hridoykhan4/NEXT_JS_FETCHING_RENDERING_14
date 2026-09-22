@@ -5,6 +5,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: 'www.themealdb.com',
+        pathname: '/images/media/**'
       },
       {
         protocol: "https",
