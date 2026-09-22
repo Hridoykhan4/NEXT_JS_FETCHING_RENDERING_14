@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 
+
+export const generateStaticParams = () => {
+    return [{ id: '52904' }, { id: '52998' }, { id: '53071' }]
+}
+
+
 // Professional API Fetching with Error Handling
 const getSingleFood = async (id) => {
     try {

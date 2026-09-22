@@ -4,18 +4,18 @@ import CartItems from "./CartItems";
 import InputSearch from "@/components/InputSearch";
 
 // Professional API Fetching Function
-const getFoods = async () => {
+const getFoods = async (search = "") => {
     try {
         const res = await fetch(
-            "https://taxi-kitchen-api.vercel.app/api/v1/foods/random",
-            { next: { revalidate: 10 } } // ISR caching strategy (revalidate every 10 seconds)
+            `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${encodeURIComponent(search)}`,
+            { next: { revalidate: 10 } } // ISR caching strategy
         );
 
         if (!res.ok) throw new Error("Failed to fetch foods");
 
         const data = await res.json();
 
-        // Filtering on server response safely
+        // Safely filter response on server
         return data.foods?.filter((f) => f.category !== "Pork") || [];
     } catch (error) {
         console.error("Error fetching foods:", error);
@@ -23,10 +23,12 @@ const getFoods = async () => {
     }
 };
 
-export default async function FoodsPage({searchParams}) {
-    const {search = ""} = await searchParams;
-    console.log(search);
-    const foods = await getFoods();
+export default async function FoodsPage({ searchParams }) {
+    // Await searchParams as required in Next.js 15+
+    const resolvedParams = await searchParams;
+    const searchQuery = resolvedParams?.search || "";
+
+    const foods = await getFoods(searchQuery);
 
     return (
         <div className="space-y-6">
@@ -36,11 +38,13 @@ export default async function FoodsPage({searchParams}) {
                     Total <span className="text-[var(--primary)]">{foods.length}</span> Foods Found
                 </h2>
                 <p className="text-stone-500 text-sm">
-                    Explore our delicious items prepared fresh for you.
+                    {searchQuery
+                        ? `Showing results for "${searchQuery}"`
+                        : "Explore our delicious items prepared fresh for you."}
                 </p>
             </div>
 
-            {/* Search Bar Container */}
+            {/* Search Input Section */}
             <div>
                 <InputSearch />
             </div>
@@ -48,7 +52,7 @@ export default async function FoodsPage({searchParams}) {
             {/* Main Grid Layout (Foods + Cart Sidebar) */}
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
 
-                {/* Food Items Section (Takes 3 Columns on Large Screens) */}
+                {/* Food Items Section */}
                 <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     {foods.length > 0 ? (
                         foods.map((food) => (
@@ -56,12 +60,12 @@ export default async function FoodsPage({searchParams}) {
                         ))
                     ) : (
                         <div className="col-span-full py-12 text-center text-stone-500 bg-[var(--card)] border border-[var(--border)] rounded-2xl">
-                            No food items found at the moment.
+                            No food items found for &quot;{searchQuery}&quot;. Try searching for something else.
                         </div>
                     )}
                 </div>
 
-                {/* Sidebar Cart Section (Takes 1 Column, Sticky) */}
+                {/* Sidebar Cart Section */}
                 <div className="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-5 shadow-sm sticky top-24">
                     <h3 className="text-xl font-bold mb-3">Cart Items</h3>
                     <hr className="border-[var(--border)] mb-4" />

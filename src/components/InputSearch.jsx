@@ -1,33 +1,47 @@
-'use client'
+'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 const InputSearch = () => {
     const router = useRouter();
-    const params = useSearchParams()
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
 
-    const handleSubmit = e => {
+    // URL-এ আগে থেকে থাকা সার্চ ট্রিম বের করা (যদি পেজ রিলোড হয়)
+    const currentSearch = searchParams.get("search") || "";
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const value = form.search.value;
-             
-        //নতুন search parameters
-        
+        const value = form.search.value.trim();
 
+        const params = new URLSearchParams(searchParams.toString());
 
-    }
+        if (value) {
+            params.set("search", value);
+        } else {
+            params.delete("search"); // খালি সাবমিট করলে প্যারাম মুছে ফেলা
+        }
+
+        router.push(`${pathname}?${params.toString()}`);
+    };
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex items-center gap-3 max-w-xl">
+            <div className="relative flex-1">
                 <input
                     name="search"
-                    className="px-1 py-3 border-2 rounded w-2xl"
                     type="text"
-                    placeholder="Search your choice"
+                    defaultValue={currentSearch}
+                    placeholder="Search food by name..."
+                    className="w-full px-4 py-3 bg-[var(--card)] border border-[var(--border)] rounded-2xl text-sm focus:outline-none focus:border-[var(--primary)] transition-all"
                 />
-                <button className="px-4 py-2 bg-yellow-500 text-black rounded cursor-pointer">Search</button>
-            </form>
-        </div>
+            </div>
+
+            <button type="submit" className="btn-primary py-3 px-6 text-sm">
+                Search
+            </button>
+        </form>
     );
 };
 
