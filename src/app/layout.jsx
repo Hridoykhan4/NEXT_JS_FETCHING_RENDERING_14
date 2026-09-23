@@ -62,6 +62,9 @@ export default function RootLayout({ children }) {
               <Link className="btn-primary" href="/reviews">
                 Reviews
               </Link>
+              <Link className="btn-accent" href="/feedback">
+                Feedback
+              </Link>
             </nav>
           </div>
         </header>
