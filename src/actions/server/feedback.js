@@ -3,3 +3,8 @@ import { connect } from "@/lib/dbConnect";
 
 export const getFeedback = async () =>
   await connect("feedback").find().toArray();
+
+
+export const postFeedback = async (message) => {
+  
+}
