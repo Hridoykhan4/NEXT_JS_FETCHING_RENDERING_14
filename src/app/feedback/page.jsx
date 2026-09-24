@@ -3,6 +3,8 @@ import FeedbackCard from "@/components/cards/FeedbackCard";
 import Link from "next/link";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
     title: "Feedbacks",
     description: "Read customer feedback or share your dining experience with us.",
@@ -34,7 +36,7 @@ const FeedbackPage = async () => {
             <div className="space-y-4">
                 {feedback.length > 0 ? (
                     feedback.map((fd) => (
-                        <FeedbackCard key={fd._id || fd.id} feedback={fd} />
+                        <FeedbackCard key={fd._id} feedback={fd} />
                     ))
                 ) : (
                     <div className="py-16 text-center text-stone-500 bg-[var(--card)] border border-[var(--border)] rounded-3xl">

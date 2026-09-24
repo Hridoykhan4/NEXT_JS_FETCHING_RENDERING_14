@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 const FeedbackCard = ({ feedback }) => {
@@ -31,7 +29,7 @@ const FeedbackCard = ({ feedback }) => {
 
             {/* Action Buttons using Global Styles */}
             <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
-                <button
+                {/* <button
                     onClick={() => console.log("Update", _id)}
                     className="px-4 py-1.5 text-xs font-semibold rounded-xl bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100 transition-colors cursor-pointer"
                 >
@@ -43,7 +41,7 @@ const FeedbackCard = ({ feedback }) => {
                     className="px-4 py-1.5 text-xs font-semibold rounded-xl bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 transition-colors cursor-pointer"
                 >
                     Delete
-                </button>
+                </button> */}
             </div>
         </div>
     );

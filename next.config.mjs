@@ -4,14 +4,23 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: 'www.themealdb.com',
-        pathname: '/images/media/**'
+        hostname: "www.themealdb.com",
+        pathname: "/images/media/**",
       },
       {
         protocol: "https",
-        hostname: 'randomuser.me',
+        hostname: "randomuser.me",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/food-details/:id",
+        destination: "/foods/:id",
+        permanent: true,
+      },
+    ];
   },
 };
 
